@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.text {
+	font-size: 30px;
+	color: black;
+}
+
+.answer {
+	font-size: 60px;
+	color: red;
+}
+</style>
+<script src="../js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript">
+    $(".Collapsable").click(function () {
+
+        $(this).parent().children().toggle();
+        $(this).toggle();
+
+    });
+
+</script>
+</head>
+<body>
+	<ul>
+		<li><span class="Collapsable">English</span>
+		<ul>
+			<li>
+				<span class="Collapsable">Reading</span>
+				<ul>
+					<li><span class="Collapsable"><a href="./EnglishReading.html?filename=..//resource/eng/zoo.xml">Going to the zoo</a></span></li>
+					<li>
+						<span class="Collapsable">Addition</span>
+						<ul>
+							<li><span class="Collapsable"><a href="./EnglishReading.html?filename=..//resource/eng/class3/ThePuppetShow_1.xml">The Puppet Show -1</a></span></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+		</li>
+		
+		<li>
+			<span class="Collapsable">Math</span>
+			<ul>
+				<li>
+					<span class="Collapsable">Addition</span>
+					<ul>
+						<li><span class="Collapsable"><a href="./CalculationPractice.html?ll1=1&hl1=10&ll2=2&hl2=2&o=a&c=3&r=10">Add by 2</a></span></li>
+						<li><span class="Collapsable"><a href="./CalculationPractice.html?ll1=1&hl1=10&ll2=3&hl2=3&o=a&c=3&r=10">Add by 3</a></span></li>
+						<li><span class="Collapsable"><a href="./CalculationPractice.html?ll1=1&hl1=10&ll2=4&hl2=4&o=a&c=3&r=10">Add by 4</a></span></li>
+						<li><span class="Collapsable"><a href="./CalculationPractice.html?ll1=1&hl1=10&ll2=5&hl2=5&o=a&c=3&r=10">Add by 5</a></span></li>
+					</ul>
+				</li>
+				<li>
+					<span class="Collapsable">Subtraction</span>
+					<ul>
+						<li><span class="Collapsable"><a href="./CalculationPractice.html?ll1=1&hl1=10&ll2=2&hl2=2&o=s&c=3&r=10">Subtraction by 2</a></span></li>
+						<li><span class="Collapsable"><a href="./CalculationPractice.html?ll1=1&hl1=10&ll2=3&hl2=3&o=s&c=3&r=10">Subtraction by 3</a></span></li>
+						<li><span class="Collapsable"><a href="./CalculationPractice.html?ll1=1&hl1=10&ll2=4&hl2=4&o=s&c=3&r=10">Subtraction by 4</a></span></li>
+						<li><span class="Collapsable"><a href="./CalculationPractice.html?ll1=1&hl1=10&ll2=5&hl2=5&o=s&c=3&r=10">Subtraction by 5</a></span></li>
+					</ul>
+				</li>
+				<li>
+					<span class="Collapsable">Multiplication</span>
+					<ul>
+						<li><span class="Collapsable"><a href="./CalculationPractice.html?ll1=1&hl1=10&ll2=2&hl2=2&o=m&c=3&r=10">Multiplication by 2</a></span></li>
+						<li><span class="Collapsable"><a href="./CalculationPractice.html?ll1=1&hl1=10&ll2=3&hl2=3&o=m&c=3&r=10">Multiplication by 3</a></span></li>
+						<li><span class="Collapsable"><a href="./CalculationPractice.html?ll1=1&hl1=10&ll2=4&hl2=4&o=m&c=3&r=10">Multiplication by 4</a></span></li>
+						<li><span class="Collapsable"><a href="./CalculationPractice.html?ll1=1&hl1=10&ll2=5&hl2=5&o=m&c=3&r=10">Multiplication by 5</a></span></li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+	</ul>
+</body>
+</html>

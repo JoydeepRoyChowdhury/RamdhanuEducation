@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.text {
+	font-size: 30px;
+	color: black;
+}
+
+.answer {
+	font-size: 60px;
+	color: red;
+}
+</style>
+<script src="../js/jquery-2.1.4.min.js"></script>
+<script>
+	$(document).ready(function() {
+		var wordCount = 0;
+		var fileName = getUrlVars()["filename"];
+		
+		getContent(fileName);
+		$("#check").click(function() {
+			this.disabled = true;
+			$('[id$="value"]').each(function() {
+				var elementName = this.id.split("_")[0];
+				verifyWord(elementName);
+			});
+
+		});
+	});
+	
+	function getContent(fileName) {
+		$.ajax({
+			url : fileName,
+			error : function(xhr, ajaxOptions, thrownError) {
+				alert(xhr.status);
+				alert(thrownError);
+			},
+			success : function(result) {
+				var val = "";
+				//$words = $(result).find("words");
+				//var wordlist = $(words);
+				$story = $(result).find("story");
+				
+				var i=0;
+
+				$story.children().each(function() {
+
+					var tagName = this.tagName;
+					if (tagName == "title") {
+						val += "<h1 align='center'>" + $(this).text() + "</h1>" + "<br><br>";
+					} else if (tagName == "text") {
+						val += $(this).text();
+					} else if (tagName.startsWith("word")) {
+						var fieldname = tagName + i;
+						i++;
+						val += "<nobr><span style='border: 8px solid red;vertical-align: middle;'><select class='text' id=" + fieldname + ">";
+						val += convertToOption($(this).text());
+						val += "</select></span>";
+						val += "<input type=hidden id='"+ fieldname + "_value" +"' value='"+ $(this).text().split(",")[0] +"''/>";
+						val += "<span class='answer' id='"+ fieldname + "_result" +"'/>";
+						val += "</nobr>";
+
+					}
+				});
+				$("#div1").html(val);
+			}
+	});
+	}
+
+	function verifyWord(param) {
+		// $("#" + param).attr("disabled", true);
+		if ($("#" + param).val() == $("#" + param + "_value").val()) {
+			$("#" + param + "_result").html('&#10003;');
+		} else {
+			$("#" + param + "_result").html('&#10006;');				
+		}		
+	}
+	function convertToOption(param) {
+		var res = param.split(",");
+		res.sort(function() { return 0.5 - Math.random() });
+		var text = "";
+		var index = 0;
+		for	(index = 0; index < res.length; index++) {
+		    text += "<option value='" + res[index] + "'>" + res[index] + "</option>";
+		}
+
+		return text;
+	}
+	function getUrlVars() {
+		var vars = {};
+		var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+							vars[key] = value;
+					});
+		return vars;
+	}
+</script>
+</head>
+<body>
+
+	<div id="div1" class='text' style='line-height: 200%;'>
+		<h2>Let jQuery AJAX Change This Text</h2>
+	</div>
+	
+	<br>
+	<br>
+	<br>
+	<br>
+	<div align="center">
+		<button id="check"><font size="10">Check</font></button>
+	</div>
+
+<br><br><br><br>
+	<div align="left">
+		<a href="Index.html">Back</a>
+	</div>
+</body>
+</html>

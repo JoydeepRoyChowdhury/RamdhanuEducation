@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+<style>
+.txtAnswer {
+	font-size: 24px;
+ }
+.result {
+    color: white;
+}
+.tdclass {
+}
+</style>
+</head>
+ <body>
+
+<script>
+
+
+
+/////////////////////////////        End Header   ///////////////////////////////////////
+
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+
+function myRandom(d) {
+	var ran = Math.floor((Math.random()) * d + 1);
+	return (ran > d ?  ran-1 : ran);
+}
+
+function calcQuestion() {
+	var lowLimit1 = parseInt(getParameterByName('ll1'));
+	var highLimit1 = parseInt(getParameterByName('hl1'));
+	var lowLimit2 = parseInt(getParameterByName('ll2'));
+	var highLimit2 = parseInt(getParameterByName('hl2'));
+	var operation = getParameterByName('o');
+	var i = myRandom(highLimit1-lowLimit1) + lowLimit1;
+	var j = myRandom(highLimit2-lowLimit2) + lowLimit2;
+	var result = 0;
+	switch(operation) {
+		case 'm':
+			result = i * j;
+			break;
+		case 'a':
+			result = i + j;
+			break;
+		case 's':
+			while (i<j) {
+				i = myRandom(highLimit1-lowLimit1) + lowLimit1;
+				j = myRandom(highLimit2-lowLimit2) + lowLimit2;
+			}
+			result = i - j;
+			break;
+	}
+
+
+	var sign = '';
+	var signExplained = '';
+	switch(operation) {
+		case 'm':
+			sign = 'X';
+			signExplained = ' multply ';
+			break;
+		case 'a':
+			sign = '+';
+			signExplained = ' add ';
+			break;
+		case 's':
+			sign = '-';
+			signExplained = ' subtract ';
+			break;
+	}
+
+    var returnVal =i + sign + j + ' = <input class="txtAnswer" type=text size=3 maxlength=6 value=""/><input id="result" type="hidden" value="' + result + '""></input>';
+    returnVal += '<font size="10" color="red"></font>';
+	return returnVal;
+}
+
+function writeTD() {
+		var col = parseInt(getParameterByName('c'));
+		var row = parseInt(getParameterByName('r'));
+	    var i;
+	    for (i = 0; i < row; i++) {
+	    	document.write("<tr>");
+		    var j;
+		    for (j = 0; j < col; j++) {
+				var result = calcQuestion();
+				document.write("<td id='mytd' class='tdclass'>" + result + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>");		    	
+		    }
+	    	document.write("</tr>");
+	    }
+}
+function showAnswer() {
+    var y = document.getElementsByClassName("txtAnswer");
+    var i;
+    for (i = 0; i < y.length; i++) {
+        y[i].readOnly = true;
+    }
+    var z = document.getElementsByClassName("tdclass");
+    var i;
+    for (i = 0; i < z.length; i++) {
+        var answer = z[i].childNodes[1].value;
+        var result = z[i].childNodes[2].value;
+        if (answer == result) {
+            z[i].childNodes[3].innerHTML = '&#10003;';
+        } else {
+            z[i].childNodes[3].innerHTML = '&#10006;';
+        }
+    }
+}
+</script>
+<font size=+4>
+<table border=1 width="100%">
+	<script>
+		writeTD();
+	</script>
+</table>
+	<div align="center">
+		<input style='font-size: 50px;' type=button value="Check" onclick='javascript:showAnswer();'/>
+	</div>
+</font>
+<br><br><br><br>
+	<div align="left">
+		<a href="Index.html">Back</a>
+	</div>
+ </body>
+</html>
