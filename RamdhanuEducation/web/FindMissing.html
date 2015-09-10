@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+<style>
+.txtAnswer {
+	font-size: 24px;
+ }
+.result {
+    color: white;
+}
+</style>
+</head>
+ <body>
+
+<script>
+
+/////////////////////////////        Header   ///////////////////////////////////////
+
+var myDelay = 3;
+
+
+/////////////////////////////        End Header   ///////////////////////////////////////
+
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+
+function myRandom(d) {
+	var ran = Math.floor((Math.random()) * d + 1);
+	return ran;
+}
+
+function myTimer() {
+	var lowLimit1 = parseInt(getParameterByName('lowLimit1'));
+	var highLimit1 = parseInt(getParameterByName('highLimit1'));
+	var lowLimit2 = parseInt(getParameterByName('lowLimit2'));
+	var highLimit2 = parseInt(getParameterByName('highLimit2'));
+	var delay = parseInt(getParameterByName('delay'));
+	var operation = getParameterByName('operation');
+	myDelay = delay;
+	var i = myRandom(highLimit1-lowLimit1) + lowLimit1;
+	var j = myRandom(highLimit2-lowLimit2) + lowLimit2;
+	var result = 0;
+	switch(operation) {
+		case 'm':
+			result = i * j;
+			break;
+		case 'a':
+			result = i + j;
+			break;
+		case 's':
+			if (i<j) {
+				var res = i;
+				i = j;
+				j = res;
+			}
+			result = i - j;
+			break;
+	}
+
+
+	var sign = '';
+	var signExplained = '';
+	switch(operation) {
+		case 'm':
+			sign = 'X';
+			signExplained = ' multply ';
+			break;
+		case 'a':
+			sign = '+';
+			signExplained = ' add ';
+			break;
+		case 's':
+			sign = '-';
+			signExplained = ' subtract ';
+			break;
+	}
+
+var first = result %2;
+
+
+    var returnVal = "";
+	if (first == 0) {
+		returnVal += "<input class='txtAnswer' type=text size=3 maxlength=6/>" + sign + j + ' = ' + result;
+	} else {
+		returnVal += i + sign + "<input class='txtAnswer' type=text size=3 maxlength=6/>" + ' = ' + result;
+	}
+	
+	return returnVal;
+}
+
+function writeTD() {
+		var result = myTimer();
+		document.write("<td>" + result + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>");
+}
+function showAnswer() {
+    var x = document.getElementsByClassName("result");
+    var i;
+    for (i = 0; i < x.length; i++) {
+        x[i].style.color = "blue";
+    }
+}
+</script>
+<font size=+4>
+<table border=1>
+	<tr>
+		<script>
+			writeTD();
+			writeTD();
+		</script>
+	</tr>
+	<tr>
+		<script>
+			writeTD();
+			writeTD();
+		</script>
+	</tr>
+	<tr>
+		<script>
+			writeTD();
+			writeTD();
+		</script>
+	</tr>
+	<tr>
+		<script>
+			writeTD();
+			writeTD();
+		</script>
+	</tr>
+	<tr>
+		<script>
+			writeTD();
+			writeTD();
+		</script>
+	</tr>
+</table>
+</font>
+ </body>
+</html>

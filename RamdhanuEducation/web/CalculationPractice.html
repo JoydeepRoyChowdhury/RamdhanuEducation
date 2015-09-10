@@ -35,8 +35,8 @@ function getParameterByName(name) {
 
 
 function myRandom(d) {
-	var ran = Math.floor((Math.random()) * d + 1);
-	return (ran > d ?  ran-1 : ran);
+	var ran = Math.floor(Math.random() * (d+1));
+	return ran;
 }
 
 function calcQuestion() {
@@ -82,8 +82,23 @@ function calcQuestion() {
 			break;
 	}
 
-    var returnVal =i + sign + j + ' = <input class="txtAnswer" type=text size=3 maxlength=6 value=""/><input id="result" type="hidden" value="' + result + '""></input>';
-    returnVal += '<font size="10" color="red"></font>';
+	var format = getParameterByName('f');
+
+	var returnVal = "";
+	switch(format) {
+		case 'o':
+		    returnVal += i + sign + j + ' = <input class="txtAnswer" type=text size=3 maxlength=6 value=""/><input id="result" type="hidden" value="' + result + '""></input>';
+	    	returnVal += '<font size="10" color="red"></font>';
+			break;
+		case 'w':
+		    returnVal += "<table>";
+		    returnVal += "<tr><td align=right>&nbsp;</td></tr>";
+		    returnVal += "<tr><td align=right>" + i + "</td></tr>";
+		    returnVal += "<tr><td align=right>" + sign + " " + j + "</td></tr>";
+		    returnVal += "<tr><td align right>______</td></tr>";
+		    returnVal += "</table>";
+		    break;
+	}
 	return returnVal;
 }
 
