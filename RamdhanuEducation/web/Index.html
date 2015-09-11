@@ -20,7 +20,52 @@
         $(this).toggle();
 
     });
+    
+    function writeMathItem(title, ll1, hl1, ll2, hl2, o, c, r, f) {
+    	var link = '<a href="./CalculationPractice.html?'
+    			+ "ll1=" + ll1
+    			+ "&hl1=" + hl1
+    			+ "&ll2=" + ll2
+    			+ "&hl2=" + hl2
+    			+ "&o=" + o
+    			+ "&c=" + c
+    			+ "&r=" + r
+    			+ "&f=" + f
+    			+ '">' + title + '</a>';
+    	document.write(link);
+    	return;
+    }
 
+    function writeSingleLine(operation, hl2, o) {
+    	document.write('<li><span class="Collapsable">'+ operation + ' by ' + hl2 +'&nbsp; &nbsp; &nbsp; &nbsp;');    	
+    	writeAllMathItem(hl2, o);
+    	document.write('</span></li>');
+    }
+    
+    function writeAllMathItem(hl2, o) {
+		writeMathItem('On screen (Single)', 1, 10, hl2, hl2, o, 3, 10, 'o');
+    	document.write("&nbsp;&nbsp;&nbsp;&nbsp;");
+		writeMathItem('On screen (Upto)', 1, 10, 2, hl2, o, 3, 10, 'o');
+    	document.write("&nbsp;&nbsp;&nbsp;&nbsp;");
+		writeMathItem('Missing (Single)', 1, 10, hl2, hl2, o, 3, 10, 'm');
+    	document.write("&nbsp;&nbsp;&nbsp;&nbsp;");
+		writeMathItem('Missing (Upto)', 1, 10, 2, hl2, o, 3, 10, 'm');
+    	document.write("&nbsp;&nbsp;&nbsp;&nbsp;");
+		writeMathItem('Worksheet (Single)', 1, 10, hl2, hl2, o, 3, 10, 'w');
+    	document.write("&nbsp;&nbsp;&nbsp;&nbsp;");
+		writeMathItem('Worksheet (Upto)', 1, 10, 2, hl2, o, 3, 10, 'w');
+    }
+    function createWorksheet(operation, o, d) {
+    	document.write('<li><span class="Collapsable">'+ operation + ' worksheets'+'&nbsp; &nbsp; &nbsp; &nbsp;');    	
+    	for (var i=1; i<=d; i++) {
+    		createWorksheetItem(o,i);
+        	document.write("&nbsp;&nbsp;&nbsp;&nbsp;");
+    	}
+    	document.write('</span></li>');
+    }
+    function createWorksheetItem(o, d) {
+		writeMathItem('By ' + d + ' digit', Math.pow(10, d-1), Math.pow(10, d)-1, Math.pow(10, d-1), Math.pow(10, d)-1, o, 3, 6, 'w');    	
+    }
 </script>
 </head>
 <body>
@@ -48,85 +93,51 @@
 				<li>
 					<span class="Collapsable">Addition</span>
 					<ul>
-						<li><span class="Collapsable">Add by 2&nbsp; &nbsp; &nbsp; &nbsp;
-								<a href="./CalculationPractice.html?ll1=1&hl1=10&ll2=2&hl2=2&o=a&c=3&r=10&f=o">On Screen (Single)</a>&nbsp; &nbsp; &nbsp; &nbsp;
-								<a href="./CalculationPractice.html?ll1=1&hl1=10&ll2=2&hl2=2&o=a&c=3&r=5&f=w">Worksheet</a>
-							</span>
-						</li>
-						<li><span class="Collapsable">Add by 3&nbsp; &nbsp; &nbsp; &nbsp;
-								<a href="./CalculationPractice.html?ll1=1&hl1=10&ll2=3&hl2=3&o=a&c=3&r=10&f=o">On Screen (Single)</a>&nbsp; &nbsp; &nbsp; &nbsp; 
-								<a href="./CalculationPractice.html?ll1=1&hl1=10&ll2=2&hl2=3&o=a&c=3&r=10&f=o">On Screen (Upto)</a>&nbsp; &nbsp; &nbsp; &nbsp;
-								<a href="./CalculationPractice.html?ll1=1&hl1=10&ll2=3&hl2=3&o=a&c=3&r=5&f=w">Worksheet</a>&nbsp; &nbsp; &nbsp; &nbsp; 
-							</span>
-						</li>
-						<li><span class="Collapsable">Add by 4&nbsp; &nbsp; &nbsp; &nbsp;
-								<a href="./CalculationPractice.html?ll1=1&hl1=10&ll2=4&hl2=4&o=a&c=3&r=10&f=o">On Screen (Single)</a>&nbsp; &nbsp; &nbsp; &nbsp; 
-								<a href="./CalculationPractice.html?ll1=1&hl1=10&ll2=2&hl2=4&o=a&c=3&r=10&f=o">On Screen (Upto)</a>&nbsp; &nbsp; &nbsp; &nbsp; 
-								<a href="./CalculationPractice.html?ll1=1&hl1=10&ll2=4&hl2=4&o=a&c=3&r=5&f=w">Worksheet</a>&nbsp; &nbsp; &nbsp; &nbsp; 
-							</span>
-						</li>
-						<li><span class="Collapsable">Add by 5&nbsp; &nbsp; &nbsp; &nbsp;
-								<a href="./CalculationPractice.html?ll1=1&hl1=10&ll2=5&hl2=5&o=a&c=3&r=10&f=o">On Screen (Single)</a>&nbsp; &nbsp; &nbsp; &nbsp; 
-								<a href="./CalculationPractice.html?ll1=1&hl1=10&ll2=2&hl2=5&o=a&c=3&r=10&f=o">On Screen (Upto)</a>&nbsp; &nbsp; &nbsp; &nbsp; 
-								<a href="./CalculationPractice.html?ll1=1&hl1=10&ll2=5&hl2=5&o=a&c=3&r=5&f=w">Worksheet</a>&nbsp; &nbsp; &nbsp; &nbsp; 
-							</span>
-						</li>
+						<script>writeSingleLine('Add', 2, 'a');</script>
+						<script>writeSingleLine('Add', 3, 'a');</script>
+						<script>writeSingleLine('Add', 4, 'a');</script>
+						<script>writeSingleLine('Add', 5, 'a');</script>
+						<script>writeSingleLine('Add', 6, 'a');</script>
+						<script>writeSingleLine('Add', 7, 'a');</script>
+						<script>writeSingleLine('Add', 8, 'a');</script>
+						<script>writeSingleLine('Add', 9, 'a');</script>
+						<script>writeSingleLine('Add', 10, 'a');</script>
 					</ul>
 				</li>
 				<li>
 					<span class="Collapsable">Subtraction</span>
 					<ul>
-						<li><span class="Collapsable">Subtraction by 2&nbsp; &nbsp; &nbsp; &nbsp;
-								<a href="./CalculationPractice.html?ll1=1&hl1=10&ll2=2&hl2=2&o=s&c=3&r=10&f=o">On Screen (Single)</a>&nbsp; &nbsp; &nbsp; &nbsp;
-								<a href="./CalculationPractice.html?ll1=1&hl1=10&ll2=2&hl2=2&o=s&c=3&r=5&f=w">Worksheet</a>
-							</span>
-						</li>
-						<li><span class="Collapsable">Subtraction by 3&nbsp; &nbsp; &nbsp; &nbsp;
-								<a href="./CalculationPractice.html?ll1=1&hl1=10&ll2=3&hl2=3&o=s&c=3&r=10&f=o">On Screen (Single)</a>&nbsp; &nbsp; &nbsp; &nbsp; 
-								<a href="./CalculationPractice.html?ll1=1&hl1=10&ll2=2&hl2=3&o=s&c=3&r=10&f=o">On Screen (Upto)</a>&nbsp; &nbsp; &nbsp; &nbsp;
-								<a href="./CalculationPractice.html?ll1=1&hl1=10&ll2=3&hl2=3&o=s&c=3&r=5&f=w">Worksheet</a>&nbsp; &nbsp; &nbsp; &nbsp; 
-							</span>
-						</li>
-						<li><span class="Collapsable">Subtraction by 4&nbsp; &nbsp; &nbsp; &nbsp;
-								<a href="./CalculationPractice.html?ll1=1&hl1=10&ll2=4&hl2=4&o=s&c=3&r=10&f=o">On Screen (Single)</a>&nbsp; &nbsp; &nbsp; &nbsp; 
-								<a href="./CalculationPractice.html?ll1=1&hl1=10&ll2=2&hl2=4&o=s&c=3&r=10&f=o">On Screen (Upto)</a>&nbsp; &nbsp; &nbsp; &nbsp; 
-								<a href="./CalculationPractice.html?ll1=1&hl1=10&ll2=4&hl2=4&o=s&c=3&r=5&f=w">Worksheet</a>&nbsp; &nbsp; &nbsp; &nbsp; 
-							</span>
-						</li>
-						<li><span class="Collapsable">Subtraction by 5&nbsp; &nbsp; &nbsp; &nbsp;
-								<a href="./CalculationPractice.html?ll1=1&hl1=10&ll2=5&hl2=5&o=s&c=3&r=10&f=o">On Screen (Single)</a>&nbsp; &nbsp; &nbsp; &nbsp; 
-								<a href="./CalculationPractice.html?ll1=1&hl1=10&ll2=2&hl2=5&o=s&c=3&r=10&f=o">On Screen (Upto)</a>&nbsp; &nbsp; &nbsp; &nbsp; 
-								<a href="./CalculationPractice.html?ll1=1&hl1=10&ll2=5&hl2=5&o=s&c=3&r=5&f=w">Worksheet</a>&nbsp; &nbsp; &nbsp; &nbsp; 
-							</span>
-						</li>
+						<script>writeSingleLine('Subtraction', 2, 's');</script>
+						<script>writeSingleLine('Subtraction', 3, 's');</script>
+						<script>writeSingleLine('Subtraction', 4, 's');</script>
+						<script>writeSingleLine('Subtraction', 5, 's');</script>
+						<script>writeSingleLine('Subtraction', 6, 's');</script>
+						<script>writeSingleLine('Subtraction', 7, 's');</script>
+						<script>writeSingleLine('Subtraction', 8, 's');</script>
+						<script>writeSingleLine('Subtraction', 9, 's');</script>
+						<script>writeSingleLine('Subtraction', 10, 's');</script>
 					</ul>
 				</li>
 				<li>
 					<span class="Collapsable">Multiplication</span>
 					<ul>
-						<li><span class="Collapsable">Multiplication by 2&nbsp; &nbsp; &nbsp; &nbsp;
-								<a href="./CalculationPractice.html?ll1=1&hl1=10&ll2=2&hl2=2&o=m&c=3&r=10&f=o">On Screen (Single)</a>&nbsp; &nbsp; &nbsp; &nbsp;
-								<a href="./CalculationPractice.html?ll1=1&hl1=10&ll2=2&hl2=2&o=m&c=3&r=5&f=w">Worksheet</a>
-							</span>
-						</li>
-						<li><span class="Collapsable">Multiplication by 3&nbsp; &nbsp; &nbsp; &nbsp;
-								<a href="./CalculationPractice.html?ll1=1&hl1=10&ll2=3&hl2=3&o=m&c=3&r=10&f=o">On Screen (Single)</a>&nbsp; &nbsp; &nbsp; &nbsp; 
-								<a href="./CalculationPractice.html?ll1=1&hl1=10&ll2=2&hl2=3&o=m&c=3&r=10&f=o">On Screen (Upto)</a>&nbsp; &nbsp; &nbsp; &nbsp;
-								<a href="./CalculationPractice.html?ll1=1&hl1=10&ll2=3&hl2=3&o=m&c=3&r=5&f=w">Worksheet</a>&nbsp; &nbsp; &nbsp; &nbsp; 
-							</span>
-						</li>
-						<li><span class="Collapsable">Multiplication by 4&nbsp; &nbsp; &nbsp; &nbsp;
-								<a href="./CalculationPractice.html?ll1=1&hl1=10&ll2=4&hl2=4&o=m&c=3&r=10&f=o">On Screen (Single)</a>&nbsp; &nbsp; &nbsp; &nbsp; 
-								<a href="./CalculationPractice.html?ll1=1&hl1=10&ll2=2&hl2=4&o=m&c=3&r=10&f=o">On Screen (Upto)</a>&nbsp; &nbsp; &nbsp; &nbsp; 
-								<a href="./CalculationPractice.html?ll1=1&hl1=10&ll2=4&hl2=4&o=m&c=3&r=5&f=w">Worksheet</a>&nbsp; &nbsp; &nbsp; &nbsp; 
-							</span>
-						</li>
-						<li><span class="Collapsable">Multiplication by 5&nbsp; &nbsp; &nbsp; &nbsp;
-								<a href="./CalculationPractice.html?ll1=1&hl1=10&ll2=5&hl2=5&o=m&c=3&r=10&f=o">On Screen (Single)</a>&nbsp; &nbsp; &nbsp; &nbsp; 
-								<a href="./CalculationPractice.html?ll1=1&hl1=10&ll2=2&hl2=5&o=m&c=3&r=10&f=o">On Screen (Upto)</a>&nbsp; &nbsp; &nbsp; &nbsp; 
-								<a href="./CalculationPractice.html?ll1=1&hl1=10&ll2=5&hl2=5&o=m&c=3&r=5&f=w">Worksheet</a>&nbsp; &nbsp; &nbsp; &nbsp; 
-							</span>
-						</li>
+						<script>writeSingleLine('Multiplication', 2, 'm');</script>
+						<script>writeSingleLine('Multiplication', 3, 'm');</script>
+						<script>writeSingleLine('Multiplication', 4, 'm');</script>
+						<script>writeSingleLine('Multiplication', 5, 'm');</script>
+						<script>writeSingleLine('Multiplication', 6, 'm');</script>
+						<script>writeSingleLine('Multiplication', 7, 'm');</script>
+						<script>writeSingleLine('Multiplication', 8, 'm');</script>
+						<script>writeSingleLine('Multiplication', 9, 'm');</script>
+						<script>writeSingleLine('Multiplication', 10, 'm');</script>
+					</ul>
+				</li>
+				<li>
+					<span class="Collapsable">Worsheets</span>
+					<ul>
+						<script>createWorksheet('Addition', 'a', 6);</script>
+						<script>createWorksheet('Subtraction', 's', 6);</script>
+						<script>createWorksheet('Multiplication', 'm', 3);</script>
 					</ul>
 				</li>
 			</ul>

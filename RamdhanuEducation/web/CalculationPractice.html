@@ -17,12 +17,12 @@
 .tdclass {
 }
 </style>
+<script src="../js/jquery-2.1.4.min.js"></script>
 </head>
- <body>
 
 <script>
 
-
+var start = 0;
 
 /////////////////////////////        End Header   ///////////////////////////////////////
 
@@ -66,19 +66,15 @@ function calcQuestion() {
 
 
 	var sign = '';
-	var signExplained = '';
 	switch(operation) {
 		case 'm':
 			sign = 'X';
-			signExplained = ' multply ';
 			break;
 		case 'a':
 			sign = '+';
-			signExplained = ' add ';
 			break;
 		case 's':
 			sign = '-';
-			signExplained = ' subtract ';
 			break;
 	}
 
@@ -87,8 +83,18 @@ function calcQuestion() {
 	var returnVal = "";
 	switch(format) {
 		case 'o':
-		    returnVal += i + sign + j + ' = <input class="txtAnswer" type=text size=3 maxlength=6 value=""/><input id="result" type="hidden" value="' + result + '""></input>';
-	    	returnVal += '<font size="10" color="red"></font>';
+		    returnVal += i + sign + j + ' = <input id="check" class="txtAnswer" type=text size=3 maxlength=6 value=""/><input id="result" type="hidden" value="' + result + '""></input>';
+	    	returnVal += '<span id="showAnswer" style="color: red;"></span>';
+			break;
+		case 'm':
+			var first = result % 2;
+		    var returnVal = "";
+			if (first == 0) {
+				returnVal += "<input id='check' class='txtAnswer' type=text size=3 maxlength=6/>" + sign + j + ' = ' + result + '<input id="result" type="hidden" value="' + i + '"></input>';
+			} else {
+				returnVal += i + sign + "<input id='check' class='txtAnswer' type=text size=3 maxlength=6/>" + ' = ' + result + '<input id="result" type="hidden" value="' + j + '"></input>';
+			}
+	    	returnVal += '<span id="showAnswer" style="color: red;"></span>';
 			break;
 		case 'w':
 		    returnVal += "<table>";
@@ -124,25 +130,52 @@ function showAnswer() {
     }
     var z = document.getElementsByClassName("tdclass");
     var i;
+    var correct = 0;
+    var total = 0;
     for (i = 0; i < z.length; i++) {
-        var answer = z[i].childNodes[1].value;
-        var result = z[i].childNodes[2].value;
+    	total += 1;
+        var answer = GetElementInsideContainer(z[i], 'check').value;
+        var result = GetElementInsideContainer(z[i], 'result').value;
         if (answer == result) {
-            z[i].childNodes[3].innerHTML = '&#10003;';
+        	var element = GetElementInsideContainer(z[i], 'showAnswer');
+        	element.innerHTML = '&#10003;';
+        	correct += 1;
         } else {
-            z[i].childNodes[3].innerHTML = '&#10006;';
+        	var element = GetElementInsideContainer(z[i], 'showAnswer');
+        	element.innerHTML = '&#10006;';
+        }
+    }    
+	current = new Date().getTime() / 1000;
+    var z = document.getElementById("showResult");
+    z.innerHTML = "Result : " + correct + "/" + total + " in " + parseInt(current-start) + " seconds";
+}
+
+function GetElementInsideContainer(containerID, childID) {
+    var elm = {};
+    var elms = containerID.childNodes;
+    for (var i = 0; i < elms.length; i++) {
+        if (elms[i].id === childID) {
+            elm = elms[i];
+            break;
         }
     }
+    return elm;
 }
 </script>
+<body>
 <font size=+4>
+<div>
 <table border=1 width="100%">
 	<script>
+		start = new Date().getTime() / 1000;
 		writeTD();
 	</script>
 </table>
+</div>
 	<div align="center">
-		<input style='font-size: 50px;' type=button value="Check" onclick='javascript:showAnswer();'/>
+		<input  id='checkBtn' style='font-size: 50px;' type=button value="Check" onclick='javascript:showAnswer();'/>
+	</div>
+	<div align="center" id="showResult">
 	</div>
 </font>
 <br><br><br><br>
