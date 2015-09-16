@@ -14,58 +14,68 @@
 </style>
 <script src="../js/jquery-2.1.4.min.js"></script>
 <script type="text/javascript">
+$(document).ready(function(){
+
     $(".Collapsable").click(function () {
 
         $(this).parent().children().toggle();
         $(this).toggle();
-
     });
     
-    function writeMathItem(title, ll1, hl1, ll2, hl2, o, c, r, f) {
-    	var link = '<a href="./CalculationPractice.html?'
-    			+ "ll1=" + ll1
-    			+ "&hl1=" + hl1
-    			+ "&ll2=" + ll2
-    			+ "&hl2=" + hl2
-    			+ "&o=" + o
-    			+ "&c=" + c
-    			+ "&r=" + r
-    			+ "&f=" + f
-    			+ '">' + title + '</a>';
-    	document.write(link);
-    	return;
-    }
+});
 
-    function writeSingleLine(operation, hl2, o) {
-    	document.write('<li><span class="Collapsable">'+ operation + ' by ' + hl2 +'&nbsp; &nbsp; &nbsp; &nbsp;');    	
-    	writeAllMathItem(hl2, o);
-    	document.write('</span></li>');
-    }
-    
-    function writeAllMathItem(hl2, o) {
-		writeMathItem('On screen (Single)', 1, 10, hl2, hl2, o, 3, 10, 'o');
+var width = window.innerWidth;
+var height = window.innerHeight;
+function writeMathItem(title, ll1, hl1, ll2, hl2, o, f) {
+	var c = width / 500;
+	var r = height / 250;
+	if (f=='w') {
+		r = r/2;
+	}
+	var link = '<a href="./CalculationPractice.html?'
+			+ "ll1=" + ll1
+			+ "&hl1=" + hl1
+			+ "&ll2=" + ll2
+			+ "&hl2=" + hl2
+			+ "&o=" + o
+			+ "&c=" + c
+			+ "&r=" + r
+			+ "&f=" + f
+			+ '">' + title + '</a>';
+	document.write(link);
+	return;
+}
+
+function writeSingleLine(operation, hl2, o) {
+	document.write('<li><span class="Collapsable">'+ operation + ' by ' + hl2 +'&nbsp; &nbsp; &nbsp; &nbsp;');    	
+	writeAllMathItem(hl2, o);
+	document.write('</span></li>');
+}
+
+function writeAllMathItem(hl2, o) {
+	writeMathItem('On screen (Single)', 1, 10, hl2, hl2, o, 'o');
+	document.write("&nbsp;&nbsp;&nbsp;&nbsp;");
+	writeMathItem('On screen (Upto)', 1, 10, 2, hl2, o, 'o');
+	document.write("&nbsp;&nbsp;&nbsp;&nbsp;");
+	writeMathItem('Missing (Single)', 1, 10, hl2, hl2, o, 'm');
+	document.write("&nbsp;&nbsp;&nbsp;&nbsp;");
+	writeMathItem('Missing (Upto)', 1, 10, 2, hl2, o, 'm');
+	document.write("&nbsp;&nbsp;&nbsp;&nbsp;");
+	writeMathItem('Worksheet (Single)', 1, 10, hl2, hl2, o, 'w');
+	document.write("&nbsp;&nbsp;&nbsp;&nbsp;");
+	writeMathItem('Worksheet (Upto)', 1, 10, 2, hl2, o, 'w');
+}
+function createWorksheet(operation, o, d) {
+	document.write('<li><span class="Collapsable">'+ operation + ' worksheets'+'&nbsp; &nbsp; &nbsp; &nbsp;');    	
+	for (var i=1; i<=d; i++) {
+		createWorksheetItem(o,i);
     	document.write("&nbsp;&nbsp;&nbsp;&nbsp;");
-		writeMathItem('On screen (Upto)', 1, 10, 2, hl2, o, 3, 10, 'o');
-    	document.write("&nbsp;&nbsp;&nbsp;&nbsp;");
-		writeMathItem('Missing (Single)', 1, 10, hl2, hl2, o, 3, 10, 'm');
-    	document.write("&nbsp;&nbsp;&nbsp;&nbsp;");
-		writeMathItem('Missing (Upto)', 1, 10, 2, hl2, o, 3, 10, 'm');
-    	document.write("&nbsp;&nbsp;&nbsp;&nbsp;");
-		writeMathItem('Worksheet (Single)', 1, 10, hl2, hl2, o, 3, 10, 'w');
-    	document.write("&nbsp;&nbsp;&nbsp;&nbsp;");
-		writeMathItem('Worksheet (Upto)', 1, 10, 2, hl2, o, 3, 10, 'w');
-    }
-    function createWorksheet(operation, o, d) {
-    	document.write('<li><span class="Collapsable">'+ operation + ' worksheets'+'&nbsp; &nbsp; &nbsp; &nbsp;');    	
-    	for (var i=1; i<=d; i++) {
-    		createWorksheetItem(o,i);
-        	document.write("&nbsp;&nbsp;&nbsp;&nbsp;");
-    	}
-    	document.write('</span></li>');
-    }
-    function createWorksheetItem(o, d) {
-		writeMathItem('By ' + d + ' digit', Math.pow(10, d-1), Math.pow(10, d)-1, Math.pow(10, d-1), Math.pow(10, d)-1, o, 3, 6, 'w');    	
-    }
+	}
+	document.write('</span></li>');
+}
+function createWorksheetItem(o, d) {
+	writeMathItem('By ' + d + ' digit', Math.pow(10, d-1), Math.pow(10, d)-1, Math.pow(10, d-1), Math.pow(10, d)-1, o, 'w');    	
+}
 </script>
 </head>
 <body>
@@ -76,12 +86,13 @@
 				<span class="Collapsable">Reading</span>
 				<ul>
 					<li><span class="Collapsable"><a href="./EnglishReading.html?filename=..//resource/eng/zoo.xml">Going to the zoo</a></span></li>
-					<li>
-						<span class="Collapsable">Addition</span>
-						<ul>
-							<li><span class="Collapsable"><a href="./EnglishReading.html?filename=..//resource/eng/class3/ThePuppetShow_1.xml">The Puppet Show -1</a></span></li>
-						</ul>
-					</li>
+					<li><span class="Collapsable"><a href="./EnglishReading.html?filename=..//resource/eng/class3/ThePuppetShow_1.xml">The Puppet Show -1</a></span></li>
+				</ul>
+			</li>
+			<li>
+				<span class="Collapsable">Arrange Sentences</span>
+				<ul>
+					<li><span class="Collapsable"><a href="./EnglishArrangeSentences.html?filename=..//resource/eng/sentences/level1.xml">Level 1</a></span></li>
 				</ul>
 			</li>
 		</ul>
