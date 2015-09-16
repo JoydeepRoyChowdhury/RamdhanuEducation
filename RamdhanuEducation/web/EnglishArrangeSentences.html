@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.text {
+	font-size: 30px;
+	color: black;
+}
+
+.answer {
+	font-size: 60px;
+	color: red;
+}
+</style>
+<script src="../js/jquery-2.1.4.min.js"></script>
+<script>
+	var lines = [];
+	
+	$(document).ready(function() {
+		var wordCount = 0;
+		var fileName = getUrlVars()["filename"];
+		
+		getContent(fileName);
+		$("#check").click(function() {
+			this.disabled = true;
+			$('[id^=answer]').each(function() {
+				var elementSrl = this.id.split("_")[1];
+				var match = true;
+				$('[id^=option_'+elementSrl+'_]').each(function() {
+					var selectId = this.id;
+					var verifyId = this.id.replace("option", "actual");
+					if ($("#" + selectId).val() != $("#" + verifyId).val()) {
+						match = false;
+					}
+				});
+				if (match) {
+					$(this).html('&#10003;');
+				} else {
+					$(this).html('&#10006;');					
+				}
+			});
+		});
+	});
+	
+	function getContent(fileName) {
+		$.ajax({
+			url : fileName,
+			error : function(xhr, ajaxOptions, thrownError) {
+				alert(xhr.status);
+				alert(thrownError);
+			},
+			success : function(result) {
+				$line = $(result).find("lines");
+				
+				$line.children().each(function() {
+					lines.push($(this).text());
+				});
+				lines.sort(function() { return 0.5 - Math.random() });
+				var text = "<table border=1>";
+				var index = 0;
+				for	(index = 0; index < lines.length; index++) {
+				    text += printLine(lines[index], index+1);
+				}
+				text += "</table>";
+				$("#div1").html(text);
+			}
+		});
+	}
+
+	function printLine(param, srl) {
+		var endingChar = param.slice(-1);
+		var others = param.slice(0,-1);
+		var wordsJ = others.split(" ");
+		var wordsA = others.split(" ");
+		wordsJ.sort(function() { return 0.5 - Math.random() });
+		var output = "";
+		output += "<tr><td>";
+		
+		var index = 0;
+		for	(index = 0; index < wordsJ.length; index++) {
+		    output += wordsJ[index] + "&nbsp;";
+		}
+	    output += endingChar;
+		output += "&nbsp;&nbsp;";
+		output += printOptions(wordsJ, wordsA, srl);		
+	    output += endingChar;
+		output += "<span class='answer' id='answer_"+ srl +"'></span>";
+		output += "</td></tr>";
+		return output;
+	}
+
+	function printOptions(wordsJ, wordsA, srl) {
+		var optionStr = "";
+		var index = 0;
+		for	(index = 0; index < wordsA.length; index++) {
+			optionStr += "<select id='option_" + srl + "_" + (index+1) + "'>";
+			var firstCap = (index == 0) ? true : false;
+			optionStr += convertToOption(wordsJ, firstCap);
+			optionStr += "</select>"
+			optionStr += "<input type=hidden id='actual_" + srl + "_" + (index+1) + "' value='" + wordsA[index]+"'/>";
+		}		
+		return optionStr;
+	}
+	
+	function verifyWord(param) {
+		// $("#" + param).attr("disabled", true);
+		if ($("#" + param).val() == $("#" + param + "_value").val()) {
+			$("#" + param + "_result").html('&#10003;');
+		} else {
+			$("#" + param + "_result").html('&#10006;');				
+		}		
+	}
+	function convertToOption(options, firstCap) {
+		var res = options;
+		res.sort(function() { return 0.5 - Math.random() });
+		var text = "";
+		var index = 0;
+		for	(index = 0; index < res.length; index++) {
+		    text += "<option value='" + res[index] + "'>" + capitalize(res[index], firstCap) + "</option>";
+		}
+		return text;
+	}
+	
+	function capitalize(s, firstCap)
+	{
+		if (firstCap) {
+		    return s[0].toUpperCase() + s.slice(1);
+		} else {
+			return s;
+		}
+	}
+
+	
+	function getUrlVars() {
+		var vars = {};
+		var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+							vars[key] = value;
+					});
+		return vars;
+	}
+</script>
+</head>
+<body>
+
+	<div id="div1" class='text' style='line-height: 200%;'>
+		<h2>Let jQuery AJAX Change This Text</h2>
+	</div>
+	
+	<br>
+	<br>
+	<br>
+	<br>
+	<div align="center">
+		<button id="check"><font size="10">Check</font></button>
+	</div>
+
+<br><br><br><br>
+	<div align="left">
+		<a href="Index.html">Back</a>
+	</div>
+</body>
+</html>
