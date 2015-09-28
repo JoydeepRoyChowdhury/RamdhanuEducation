@@ -18,7 +18,33 @@
 		var wordCount = 0;
 		var fileName = getUrlVars()["filename"];
 		
-		getContent(fileName);
+		var contentXML = getContent(fileName);
+		xmlDoc = $.parseXML( contentXML );
+		$story = $(xmlDoc).find("story");
+		
+		var val = "";
+		var i=0;
+
+		$story.children().each(function() {
+
+			var tagName = this.tagName;
+			if (tagName == "title") {
+				val += "<h1 align='center'>" + $(this).text() + "</h1>" + "<br><br>";
+			} else if (tagName == "text") {
+				val += $(this).text();
+			} else if (tagName.startsWith("word")) {
+				var fieldname = tagName + i;
+				i++;
+				val += "<nobr><span style='border: 8px solid red;vertical-align: middle;'><select class='text' id=" + fieldname + ">";
+				val += convertToOption($(this).text());
+				val += "</select></span>";
+				val += "<input type=hidden id='"+ fieldname + "_value" +"' value='"+ $(this).text().split(",")[0] +"''/>";
+				val += "<span class='answer' id='"+ fieldname + "_result" +"'/>";
+				val += "</nobr>";
+
+			}
+		});
+		$("#div1").html(val);
 		$("#check").click(function() {
 			this.disabled = true;
 			$('[id$="value"]').each(function() {
@@ -30,42 +56,19 @@
 	});
 	
 	function getContent(fileName) {
-		$.ajax({
+		var jqXHR = $.ajax({
+			async: false,
 			url : fileName,
 			error : function(xhr, ajaxOptions, thrownError) {
 				alert(xhr.status);
 				alert(thrownError);
 			},
 			success : function(result) {
-				var val = "";
 				//$words = $(result).find("words");
 				//var wordlist = $(words);
-				$story = $(result).find("story");
-				
-				var i=0;
-
-				$story.children().each(function() {
-
-					var tagName = this.tagName;
-					if (tagName == "title") {
-						val += "<h1 align='center'>" + $(this).text() + "</h1>" + "<br><br>";
-					} else if (tagName == "text") {
-						val += $(this).text();
-					} else if (tagName.startsWith("word")) {
-						var fieldname = tagName + i;
-						i++;
-						val += "<nobr><span style='border: 8px solid red;vertical-align: middle;'><select class='text' id=" + fieldname + ">";
-						val += convertToOption($(this).text());
-						val += "</select></span>";
-						val += "<input type=hidden id='"+ fieldname + "_value" +"' value='"+ $(this).text().split(",")[0] +"''/>";
-						val += "<span class='answer' id='"+ fieldname + "_result" +"'/>";
-						val += "</nobr>";
-
-					}
-				});
-				$("#div1").html(val);
 			}
 		});
+		return jqXHR.responseText;
 	}
 
 	function verifyWord(param) {
