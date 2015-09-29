@@ -17,6 +17,33 @@
 	$(document).ready(function() {
 		var wordCount = 0;
 		var fileName = getUrlVars()["filename"];
+		var prevURL = "";
+		var nextURL = "";
+		
+		var fileparts = fileName.split("_");
+		
+		$("#prev").attr("disabled", true);
+		$("#next").attr("disabled", true);
+		if (fileparts.length > 0) {
+			var fileparts_1_1 = fileparts[1].split(".");
+			var fileNumber = parseInt(fileparts_1_1[0]);
+			var nextFilename = fileparts[0] + "_" + (fileNumber+1) + "." + fileparts_1_1[1];
+			var prevFilename = fileparts[0] + "_" + (fileNumber-1) + "." + fileparts_1_1[1];
+			// alert("next=" + nextFilename + ", prev=" + prevFilename);
+
+			var prevContent = getContent(prevFilename);
+			var nextContent = getContent(nextFilename);
+			var url = window.location.href;
+			var baseURL = url.split("=");
+			if (typeof prevContent !== 'undefined') {
+				prevURL = baseURL[0] + "=" + prevFilename;
+				$("#prev").attr("disabled", false);
+			}
+			if (typeof nextContent !== 'undefined') {
+				nextURL = baseURL[0] + "=" + nextFilename;
+				$("#next").attr("disabled", false);
+			}
+		}
 		
 		var contentXML = getContent(fileName);
 		xmlDoc = $.parseXML( contentXML );
@@ -53,6 +80,12 @@
 			});
 
 		});
+		$("#prev").click(function() {
+			window.location.href=prevURL;
+		});
+		$("#next").click(function() {
+			window.location.href=nextURL;
+		});
 	});
 	
 	function getContent(fileName) {
@@ -60,8 +93,8 @@
 			async: false,
 			url : fileName,
 			error : function(xhr, ajaxOptions, thrownError) {
-				alert(xhr.status);
-				alert(thrownError);
+				// alert(xhr.status);
+				// alert(thrownError);
 			},
 			success : function(result) {
 				//$words = $(result).find("words");
@@ -111,6 +144,12 @@
 	<br>
 	<div align="center">
 		<button id="check"><font size="10">Check</font></button>
+	</div>
+	<br>
+	<br>
+	<div align="center">
+		<button id="prev"><font size="5">Previous</font></button>
+		<button id="next"><font size="5">Next</font></button>
 	</div>
 
 <br><br><br><br>
