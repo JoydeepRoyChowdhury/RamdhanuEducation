@@ -20,8 +20,29 @@
 	$(document).ready(function() {
 		var wordCount = 0;
 		var fileName = getUrlVars()["filename"];
+
+		var fileNames = fileName.split(";");
 		
-		getContent(fileName);
+		var index = 0;
+		for	(index = 0; index < fileNames.length; index++) {
+			var contentXML = getContent(fileNames[index]);
+			var xmlDoc = $.parseXML( contentXML );
+			$line = $(xmlDoc).find("lines");
+				
+			$line.children().each(function() {
+				lines.push($(this).text());
+			});
+		}
+
+
+		lines.sort(function() { return 0.5 - Math.random() });
+		var text = "<table border=1>";
+		for	(index = 0; index < 10; index++) {
+		    text += printLine(lines[index], index+1);
+		}
+		text += "</table>";
+		$("#div1").html(text);
+
 		$("#check").click(function() {
 			this.disabled = true;
 			$('[id^=answer]').each(function() {
@@ -43,31 +64,6 @@
 		});
 	});
 	
-	function getContent(fileName) {
-		$.ajax({
-			url : fileName,
-			error : function(xhr, ajaxOptions, thrownError) {
-				alert(xhr.status);
-				alert(thrownError);
-			},
-			success : function(result) {
-				$line = $(result).find("lines");
-				
-				$line.children().each(function() {
-					lines.push($(this).text());
-				});
-				lines.sort(function() { return 0.5 - Math.random() });
-				var text = "<table border=1>";
-				var index = 0;
-				for	(index = 0; index < 10; index++) {
-				    text += printLine(lines[index], index+1);
-				}
-				text += "</table>";
-				$("#div1").html(text);
-			}
-		});
-	}
-
 	function printLine(param, srl) {
 		var endingChar = param.slice(-1);
 		var others = param.slice(0,-1);
