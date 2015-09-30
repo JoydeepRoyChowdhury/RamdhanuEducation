@@ -13,6 +13,7 @@
 }
 </style>
 <script src="../js/jquery-2.1.4.min.js"></script>
+<script src="../js/ramdhanu.js"></script>
 <script>
 	$(document).ready(function() {
 		var wordCount = 0;
@@ -44,6 +45,9 @@
 				nextURL = baseURL[0] + "=" + nextFilename;
 				$("#next").attr("disabled", false);
 			}
+		} else {
+			$("#prev").hide();
+			$("#next").hide();
 		}
 		
 		var contentXML = getContent(fileName);
@@ -96,22 +100,6 @@
 		});
 	});
 	
-	function getContent(fileName) {
-		var jqXHR = $.ajax({
-			async: false,
-			url : fileName,
-			error : function(xhr, ajaxOptions, thrownError) {
-				// alert(xhr.status);
-				// alert(thrownError);
-			},
-			success : function(result) {
-				//$words = $(result).find("words");
-				//var wordlist = $(words);
-			}
-		});
-		return jqXHR.responseText;
-	}
-
 	function verifyWord(param) {
 		// $("#" + param).attr("disabled", true);
 		if ($("#" + param).val() == $("#" + param + "_value").val()) {
@@ -130,13 +118,6 @@
 		}
 
 		return text;
-	}
-	function getUrlVars() {
-		var vars = {};
-		var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-							vars[key] = value;
-					});
-		return vars;
 	}
 </script>
 </head>
@@ -158,12 +139,8 @@
 	<br>
 	<br>
 	<div align="center">
-		<button id="prev">
-			<font size="5">Previous</font>
-		</button>
-		<button id="next">
-			<font size="5">Next</font>
-		</button>
+		<button id="prev"><img src="../resource/images/previous-icon.gif" /></button>
+		<button id="next"><img src="../resource/images/next-icon.gif" /></button>
 	</div>
 
 	<br>
