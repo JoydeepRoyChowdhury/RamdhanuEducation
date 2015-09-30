@@ -4,7 +4,7 @@
 	<lines>
 		<line>
 			<text>
-				“Hello ants. Will you play with me?” Bruno asked.
+				“Hello ants. Will you </text><word>play</word><text> with me?” Bruno asked.
 			</text>
 		</line>
 		<line>
@@ -14,7 +14,7 @@
 		</line>
 		<line>
 			<text>
-				Then Bruno saw a butterfly. But she flew away without talking to Bruno.
+				Then Bruno saw a butterfly. But she </text><word>flew</word><text> away without talking to Bruno.
 				Bruno became very sad.
 			</text>
 		</line>

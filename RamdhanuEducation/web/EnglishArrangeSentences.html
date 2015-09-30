@@ -37,7 +37,7 @@
 
 		lines.sort(function() { return 0.5 - Math.random() });
 		var text = "<table border=1>";
-		for	(index = 0; index < 10; index++) {
+		for	(index = 0; index < 10 && index < lines.length; index++) {
 		    text += printLine(lines[index], index+1);
 		}
 		text += "</table>";

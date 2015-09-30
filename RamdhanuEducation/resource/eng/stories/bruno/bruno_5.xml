@@ -4,7 +4,7 @@
 	<lines>
 		<line>
 			<text>
-				Bruno was very happy. He held the squirrels’ hands and shouted, “Hurrah!
+				Bruno was very </text><word>happy</word><text>. He held the squirrels’ hands and shouted, “Hurrah!
 				I have made two good friends.
 			</text>
 		</line>
@@ -15,7 +15,7 @@
 		</line>
 		<line>
 			<text>
-				In the evening, their mothers were happy to see them playing together.
+				In the </text><word>evening</word><text>, their mothers were happy to see them playing together.
 			</text>
 		</line>
 	</lines>
