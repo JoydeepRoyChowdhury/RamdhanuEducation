@@ -13,6 +13,7 @@
 }
 </style>
 <script src="../js/jquery-2.1.4.min.js"></script>
+<script src="../js/ramdhanu.js"></script>
 <script>
 	var lines = [];
 	
@@ -58,7 +59,7 @@
 				lines.sort(function() { return 0.5 - Math.random() });
 				var text = "<table border=1>";
 				var index = 0;
-				for	(index = 0; index < lines.length; index++) {
+				for	(index = 0; index < 10; index++) {
 				    text += printLine(lines[index], index+1);
 				}
 				text += "</table>";
@@ -74,7 +75,7 @@
 		var wordsA = others.split(" ");
 		wordsJ.sort(function() { return 0.5 - Math.random() });
 		var output = "";
-		output += "<tr><td>";
+		output += '<tr><td style="color:'+ getAColour() + '">';
 		
 		var index = 0;
 		for	(index = 0; index < wordsJ.length; index++) {

@@ -56,14 +56,14 @@
 		var val = "";
 		$title = $(xmlDoc).find("title");
 		$title.each(function() {
-			val += "<h1 align='center'>" + $(this).text() + "</h1>";
+			val += '<h1 style="color:'+ getAColour() + '" align="center">' + $(this).text() + "</h1>";
 		});
 
 		var i=0;
 
 		$lines = $(xmlDoc).find("line");
 		$lines.each(function() {
-			val += "<p>";
+			val += '<p style="color:'+ getAColour() + '">';
 			$(this).children().each(function() {
 				var tagName = this.tagName;
 				if (tagName == "text") {
