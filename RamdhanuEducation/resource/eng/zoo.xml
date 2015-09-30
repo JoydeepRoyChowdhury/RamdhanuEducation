@@ -1,46 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-	<story>
-		<title>Going to the zoo</title>
-		<text>
-			She goes to the
+<story>
+	<title>Going to the zoo</title>
+	<lines>
+		<line>
+			<text>
+				She goes to the
 			</text>
 			<word>
-			zoo, museum, school, shop, house
+				zoo, museum, school, shop, house
 			</word>
 			<text>
-			. She sees a
+				. She sees a
 			</text>
 			<word>
-			lion, radio, book, movie, car
+				lion, radio, book, movie, car
 			</word>
 			<text>
-			. The lion
-			roars. She sees an
+				. The lion
+				roars. She sees an
 			</text>
 			<word>
-			elephant, tree, boy, pencil, shoe
+				elephant, tree, boy, pencil, shoe
 			</word>
 			<text>
-			. The elephant has a
+				.
+			</text>
+		</line>
+		<line>
+			<text>
+				The elephant has a
 			</text>
 			<word>
-			long, red, soft, glass, bed
+				long, red, soft, glass, bed
 			</word>
 			<text>
-			trunk. She sees a turtle. The turtle is
+				trunk. She sees a turtle. The turtle is
 			</text>
 			<word>
-			slow, yellow, reading, cat, mango
+				slow, yellow, reading, cat, mango
 			</word>
 			<text>
-			. She sees a rabbit. The rabbit has soft
-			fur. She sees a gorilla. The gorilla
-			is
+				. She sees a rabbit. The rabbit has soft
+				fur. She sees a gorilla. The gorilla
+				is
 			</text>
 			<word>
-			eating, reading, working, seeing, playing
+				eating, reading, working, seeing, playing
 			</word>
 			<text>
-			a banana.
-		</text>
-	</story>
+				a banana.
+			</text>
+		</line>
+	</lines>
+</story>

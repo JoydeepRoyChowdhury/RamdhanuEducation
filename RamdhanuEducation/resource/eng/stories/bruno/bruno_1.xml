@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-	<story>
-		<title>Friendly Bruno</title>
-		<text>
-Bruno, the small rat, lived with his mother in a burrow. Every morning, his mother went in search of food. 
-“Bruno, close the door, and stay inside.”Mother rat said as usual before she went.
-Bruno replied, “OK, mom. Bye.”
-		</text>
-	</story>
+<story>
+	<title>Friendly Bruno</title>
+	<lines>
+		<line>
+			<text>
+				Bruno, the small rat, lived with his mother in a burrow. Every
+				morning,
+				his mother went in search of food.
+			</text>
+		</line>
+		<line>
+			<text>
+				“Bruno, close the door, and stay inside.”Mother rat said as
+				usual before
+				she went.
+			</text>
+		</line>
+		<line>
+			<text>
+				Bruno replied, “OK, mom. Bye.”
+			</text>
+		</line>
+	</lines>
+</story>

@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-	<story>
-		<title>Friendly Bruno</title>
-		<text>
-“Hello ants. Will you play with me?” Bruno asked.
-The ants replied, “No, We have to collect foot.”
-Then Bruno saw a butterfly. But she flew away without talking to Bruno. Bruno became very sad.
-		</text>
-	</story>
+<story>
+	<title>Friendly Bruno</title>
+	<lines>
+		<line>
+			<text>
+				“Hello ants. Will you play with me?” Bruno asked.
+			</text>
+		</line>
+		<line>
+			<text>
+				The ants replied, “No, We have to collect foot.”
+			</text>
+		</line>
+		<line>
+			<text>
+				Then Bruno saw a butterfly. But she flew away without talking to Bruno.
+				Bruno became very sad.
+			</text>
+		</line>
+	</lines>
+</story>

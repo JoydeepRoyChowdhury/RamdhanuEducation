@@ -1,13 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-	<story>
-		<title>The Puppet Show</title>
-		<text>
-		'I will</text><word>take, drink, play, look, sit</word><text>you to the puppet show today', Grandfather
-		</text><word>told, ate, played, took, looked</word><text>Rupa and her brother,
-		Manoj.
-		He told them about puppetsas they </text><word>walked, saw, spoke, dressed, obeyed</word><text>towards the puppet theatre.
-		He said that using puppets, which are actually </text><word>dolls, animals, people, trees, toys</word><text>,
-		puppeteers tell </text><word>stories, facts, orders, pages, books</word><text> from the Ramayana and Mahabharata.
-		Puppets are also used to teach children </text><word>good, bad, ugly, pleasant, red</word><text>habits.
-		</text>
-	</story>
+<story>
+	<title>The Puppet Show</title>
+	<lines>
+		<line>
+			<text>
+				'I will
+			</text>
+			<word>take, drink, play, look, sit</word>
+			<text>you to the puppet show today', Grandfather
+			</text>
+			<word>told, ate, played, took, looked</word>
+			<text>Rupa and her brother,
+				Manoj.
+				He told them about puppetsas they
+			</text>
+			<word>walked, saw, spoke, dressed, obeyed</word>
+			<text>towards the puppet theatre.
+				He said that using puppets, which are actually
+			</text>
+			<word>dolls, animals, people, trees, toys</word>
+			<text>,
+				puppeteers tell
+			</text>
+			<word>stories, facts, orders, pages, books</word>
+			<text> from the Ramayana and Mahabharata.
+				Puppets are also used to teach children
+			</text>
+			<word>good, bad, ugly, pleasant, red</word>
+			<text>habits.
+			</text>
+		</line>
+	</lines>
+</story>
