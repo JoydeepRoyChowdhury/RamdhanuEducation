@@ -74,7 +74,7 @@
 		text += "</table>";
 		$("#div1").html(text);
 
-		$("#video").html(objectURL);
+		$("#video").html(getObjectURL(objectURL));
 
 		$("#prev").click(function() {
 			window.location.href=prevURL;
@@ -103,6 +103,10 @@
 			});
 		});
 	});
+	
+	function getObjectURL(url) {
+		return '<object width="425" height="344"><param name="movie" value="' + url + '"></param></object>';
+	}
 	
 	function printLine(param, srl) {
 		var endingChar = param.slice(-1);
