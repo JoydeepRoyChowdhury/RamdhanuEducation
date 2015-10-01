@@ -23,11 +23,42 @@
 
 		var fileNames = fileName.split(";");
 		
+		var prevURL = "";
+		var nextURL = "";
+		
+		var fileparts = fileNames[0].split("_");
+		
+		$("#prev").hide();
+		$("#next").hide();
+		if (fileparts.length > 1 && fileNames.length == 1) {
+			var fileparts_1_1 = fileparts[1].split(".");
+			
+			var fileNumber = parseInt(fileparts_1_1[0]);
+			var nextFilename = fileparts[0] + "_" + (fileNumber+1) + "." + fileparts_1_1[1];
+			var prevFilename = fileparts[0] + "_" + (fileNumber-1) + "." + fileparts_1_1[1];
+
+			var prevContent = getContent(prevFilename);
+			var nextContent = getContent(nextFilename);
+			var url = window.location.href;
+			var baseURL = url.split("=");
+			if (typeof prevContent !== 'undefined') {
+				prevURL = baseURL[0] + "=" + prevFilename;
+				$("#prev").show();
+			}
+			if (typeof nextContent !== 'undefined') {
+				nextURL = baseURL[0] + "=" + nextFilename;
+				$("#next").show();
+			}
+		}
+
 		var index = 0;
+		var objectURL = "";
 		for	(index = 0; index < fileNames.length; index++) {
 			var contentXML = getContent(fileNames[index]);
 			var xmlDoc = $.parseXML( contentXML );
 			$line = $(xmlDoc).find("lines");
+			$object = $(xmlDoc).find("object");
+			objectURL = $object.text();
 				
 			$line.children().each(function() {
 				lines.push($(this).text());
@@ -43,6 +74,14 @@
 		text += "</table>";
 		$("#div1").html(text);
 
+		$("#video").html(objectURL);
+
+		$("#prev").click(function() {
+			window.location.href=prevURL;
+		});
+		$("#next").click(function() {
+			window.location.href=nextURL;
+		});
 		$("#check").click(function() {
 			this.disabled = true;
 			$('[id^=answer]').each(function() {
@@ -57,6 +96,7 @@
 				});
 				if (match) {
 					$(this).html('&#10003;');
+					$("#next").show();
 				} else {
 					$(this).html('&#10006;');					
 				}
@@ -139,6 +179,9 @@
 </head>
 <body>
 
+	<div id="video">
+	</div>
+
 	<div id="div1" class='text' style='line-height: 200%;'>
 		<h2>Let jQuery AJAX Change This Text</h2>
 	</div>
@@ -151,6 +194,14 @@
 		<button id="check"><font size="10">Check</font></button>
 	</div>
 
+	<br>
+	<div align="center">
+		<button id="prev"><img src="../resource/images/previous-icon.gif" /></button>
+		<button id="next"><img src="../resource/images/next-icon.gif" /></button>
+	</div>
+
+	<br>
+	<br>
 <br><br><br><br>
 	<div align="left">
 		<a href="Index.html">Back</a>
