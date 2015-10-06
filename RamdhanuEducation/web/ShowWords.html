@@ -11,6 +11,10 @@
 	font-size: 60px;
 	color: red;
 }
+.bigoption {
+	font-size: 25px;
+	color: red;
+}
 </style>
 <script src="../js/jquery-2.1.4.min.js"></script>
 <script src="../js/ramdhanu.js"></script>
@@ -43,7 +47,7 @@
 			tableXML += "<tr>";			
 			// tableXML += "<td>" + wordObjArray[index].word + "</td>";			
 			tableXML += '<td><img src="../resource/eng/words/images/' + wordObjArray[index].image + '"/></td>';			
-			var optionStr = "<select id='option_" + ( index+1) + "'>";
+			var optionStr = "<select class='bigoption' id='option_" + ( index+1) + "'>";
 			optionStr += convertToOption(wordsList, false);
 			optionStr += "</select>"
 			optionStr += "<input type=hidden id='actual_" + (index+1) + "' value='" + wordObjArray[index].word +"'/>";
