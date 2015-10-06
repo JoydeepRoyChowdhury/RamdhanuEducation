@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.text {
+	font-size: 30px;
+	color: black;
+}
+
+.answer {
+	font-size: 60px;
+	color: red;
+}
+</style>
+<script src="../js/jquery-2.1.4.min.js"></script>
+<script src="../js/ramdhanu.js"></script>
+<script>
+	$(document).ready(function() {
+		var count = getUrlVars()["count"];
+		var fileName = getUrlVars()["filename"];
+		var contentXML = getContent(fileName);
+		xmlDoc = $.parseXML( contentXML );
+
+		var tableXML = "<table>";		
+		$words = $(xmlDoc).find("word");
+		var wordObjOrigArray = [];
+		var wordsList = [];
+		$words.each(function() {
+			var wordObj = {word: $(this).find("text").text(), image: $(this).find("image").text()};
+			wordObjOrigArray.push(wordObj);
+		});
+
+		var index;
+		wordObjOrigArray.sort(function() { return 0.5 - Math.random() });
+		var wordObjArray = wordObjOrigArray.slice(0, count);
+		for	(index = 0; index < wordObjArray.length; index++) {
+			wordsList.push(wordObjArray[index].word);
+		}
+		
+		for	(index = 0; index < wordObjArray.length; index++) {
+			wordsList.sort(function() { return 0.5 - Math.random() });
+			
+			tableXML += "<tr>";			
+			// tableXML += "<td>" + wordObjArray[index].word + "</td>";			
+			tableXML += '<td><img src="../resource/eng/words/images/' + wordObjArray[index].image + '"/></td>';			
+			var optionStr = "<select id='option_" + ( index+1) + "'>";
+			optionStr += convertToOption(wordsList, false);
+			optionStr += "</select>"
+			optionStr += "<input type=hidden id='actual_" + (index+1) + "' value='" + wordObjArray[index].word +"'/>";
+			optionStr += "<span class='answer' id='answer_"+ (index+1) +"'></span>";
+			tableXML += '<td>' + optionStr + '</td>';			
+			tableXML += "</tr>";			
+		}
+		tableXML += "</table>";
+		$("#div1").html(tableXML);
+
+		$("#check").click(function() {
+			$('[id^=answer]').each(function() {
+				var match = true;
+				var elementSrl = this.id.split("_")[1];
+				$('[id^=option_'+elementSrl+']').each(function() {
+					var selectId = this.id;
+					var verifyId = this.id.replace("option", "actual");
+					if ($("#" + selectId).val() != $("#" + verifyId).val()) {
+						match = false;
+					}
+				});
+				if (match) {
+					$(this).html('&#10003;');
+				} else {
+					$(this).html('&#10006;');					
+				}
+			});
+		});
+		
+	});
+</script>
+</head>
+<body>
+
+	<div id="div1" class='text' style='line-height: 200%;'>
+		<h2>Let jQuery AJAX Change This Text</h2>
+	</div>
+
+	<br>
+	<br>
+	<br>
+	<br>
+	<div align="center">
+		<button id="check">
+			<font size="10">Check</font>
+		</button>
+	</div>
+	<br>
+	<br>
+	<br>
+	<br>
+	<div align="left">
+		<a href="Index.html">Back</a>
+	</div>
+</body>
+</html>
